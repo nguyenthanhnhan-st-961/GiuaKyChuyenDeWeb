@@ -1,0 +1,52 @@
+package com.lab5.springbootrestexample.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lab5.springbootrestexample.entity.CustomerModel;
+import com.lab5.springbootrestexample.model.Customer;
+import com.lab5.springbootrestexample.repository.CustomerRepository;
+
+@Service
+public class CustomerService {
+
+	@Autowired
+	CustomerRepository customerRepository;
+	
+	public Customer createCustomer(final Customer customer) {
+		CustomerModel customerModel = new CustomerModel();
+		BeanUtils.copyProperties(customer, customerModel);
+		customerModel = customerRepository.save(customerModel);
+		Customer customerData = new Customer();
+		BeanUtils.copyProperties(customerModel, customerData);
+		return customerData;
+	}
+	
+	public List<Customer> getCustomers() {
+		List<CustomerModel> customerModels = new ArrayList<>();
+		customerRepository.findAll().forEach(customerModels::add);
+		
+		List<Customer> customers = new ArrayList<>();
+		for(CustomerModel customerModel : customerModels) {
+			Customer customer = new Customer();
+			BeanUtils.copyProperties(customerModel, customers);
+			customers.add(customer);
+		}
+		return customers;
+	}
+	
+	public Customer getCustomer(Long id) {
+		Optional<CustomerModel> customer = customerRepository.findById(id);
+		Customer customerData = new Customer();
+		BeanUtils.copyProperties(customer.get(), customerData);
+		return customerData;
+		}
+		public void deleteCustomer(Long id) {
+		customerRepository.deleteById(id);
+		}
+}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:fragment="welcome">
+		<p align="right" style="padding-right: 40%; font-weight: bold;">
+			<span th:text="'Chào ' + ${session.user.getUsername()}"></span> | <a
+				href="/logout">Thoát</a>
+		</p>
+	</div>
+</body>
+</html>

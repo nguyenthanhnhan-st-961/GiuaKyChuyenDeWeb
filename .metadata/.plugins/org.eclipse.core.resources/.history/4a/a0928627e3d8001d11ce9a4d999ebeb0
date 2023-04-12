@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<p align="right" style="padding-right: 40%"
+		th:if="${!session.isEmpty()}">
+		<span th:text="'Chào ' + ${session.user.getUsername()}"></span> | <a
+			href="/logout">Thoát</a>
+	</p>
+</body>
+</html>

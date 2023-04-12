@@ -1,0 +1,61 @@
+package com.midterm.Forum.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.session.SessionRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.midterm.Forum.model.User;
+import com.midterm.Forum.service.ForumService;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.Session;
+
+@Controller
+
+public class ForumController {
+
+	@Autowired
+	ForumService forumService;
+
+	@Autowired
+	HttpSession httpSession;
+	
+	@Autowired
+	private SessionRepository sessionRepository;
+
+	@RequestMapping("/")
+	public String home() {
+		System.out.println("Going home...");
+		return "index";
+	}
+
+	@GetMapping("/login")
+	public String loginForm(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		return "login";
+	}
+
+	@PostMapping("/login")
+	public String loginSubmit(@ModelAttribute("user") User user) {
+		User usr = forumService.checkUser(user.getUsername(), user.getPassword());
+		System.out.println(usr);
+		if (usr != null) {
+			System.out.println("Login successful");
+
+			sessionRepository.findById(httpSession.getId()).setAttribute("user", usr);
+			
+			Session session = (Session) sessionRepository.findById("b7f06809-52fe-4d9b-8e56-a3a499c6bc54");
+			System.out.println(session);
+			
+			return "index";
+		}
+		System.out.println("Login failed");
+		return "login";
+	}
+}

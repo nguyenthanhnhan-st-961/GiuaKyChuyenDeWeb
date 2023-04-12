@@ -1,0 +1,11 @@
+INDEX VERSION 1.131
+D:\Eclipse\ChuyenDeWeb\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3356955613.index
+\ajax-basics-1-exercises\src
+D:\Eclipse\ChuyenDeWeb\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3021720890.index
+\ajax-validation\src\main\java
+D:\Eclipse\ChuyenDeWeb\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1922743885.index
+\ajax\src\main\java
+D:\Eclipse\ChuyenDeWeb\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2686406297.index
+\ajax-autocomplete\src\main\java
+D:\Eclipse\ChuyenDeWeb\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4005943777.index
+\SpringBootFormHandling\src\main\java

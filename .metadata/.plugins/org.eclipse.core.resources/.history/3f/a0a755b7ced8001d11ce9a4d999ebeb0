@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>List Topics</title>
+<style>
+	tr:nth-child(even), th:nth-child(even) {
+	  background-color: #D6EEEE;
+	}
+	thead{
+		background-color: ##808080;
+	}
+</style>
+</head>
+<body>
+	<h3>Diễn đàn: Chuyện học phí và các chính sách hỗ trợ học tập</h3>
+
+	<p> <a href="#"><button type="button">Gởi bài viết</button></a></p>
+
+	<table border="1" style="width:1000px">
+		<thead>
+			<tr align="center">
+				<td>Chủ đề</td>
+				<td>Hồi âm</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="topic : ${topics}">
+				<td>
+					<a th:href="@{/showTopic (id=${topic.getId()})}" th:text="${topic.title}"></a><br>
+						 <p th:with="newMessage=${topic.getNewMessage()}">
+							 Bài mới nhất by 
+							 <a href="#" th:if="${newMessage != null}" th:text="${newMessage.creator.username}"></a>, 
+							 <a href="#" th:if="${newMessage == null}" th:text="${topic.creator.username}"></a>, 
+							<span th:text="${topic.createdTime}"></span>
+							
+						 </p>
+				</td>
+				<td th:text="${topic.messages.size()}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

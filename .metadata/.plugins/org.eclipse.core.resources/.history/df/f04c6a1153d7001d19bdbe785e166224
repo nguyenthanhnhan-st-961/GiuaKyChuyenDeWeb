@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<h3>Diễn đàn: Chuyện học phí và các chính sách hỗ trợ học tập</h3>
+
+	<a href="#"><button type="button">Gởi bài viết</button></a>
+
+	<table>
+		<thead>
+			<tr>
+				<td>Chủ đề</td>
+				<td>Hồi âm</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="topic : ${topics}">
+				<td>
+					<a href="#" th:text="${topic.title}"></a><br>
+					 <p>
+						 Bài viết mới nhất by 
+						 <a href="#" th:text="${topic.creator.username}"></a>, 
+						<p th:text="${topic.creator.username}"></p>
+						
+					 </p>
+				</td>
+				<td th:text="${topic.messages.size()}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

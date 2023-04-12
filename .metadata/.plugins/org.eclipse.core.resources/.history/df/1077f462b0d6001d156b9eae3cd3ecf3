@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Login</title>
+
+<style type="text/css">
+label {
+	display: inline-block;
+	width: 200px;
+	margin: 5px;
+	text-align: left;
+}
+
+input[type=text], input[type=password], select {
+	display: inline-block;
+	width: 200px;
+}
+
+button {
+	padding: 5px;
+	margin: 10px;
+}
+
+span {
+    color: red;
+    font-style: italic;
+}
+</style>
+</head>
+<body>
+	<div align="center">
+		<h1>Đăng nhập</h1>
+		<form action="#" th:action="@{/login}" method="post" th:object="${user}">
+		
+			<label>Username:</label>
+	        <input type="text" th:field="*{username}" />
+	        <br/>
+	 		
+	        <label>Password:</label>
+	        <input type="password" th:field="*{password}" />
+	        <br/>
+	        
+	        <!-- <label>Email:</label>
+	        <input type="email" th:value="$aasdf" />
+	        <br/>
+	        
+	        <label>Join date:</label>
+	        <input type="text" th:value="asdfasdf" />
+	        <br/> -->
+	        <button type="submit">Đăng nhập</button>  
+		</form>
+	 
+	</div>
+</body>
+</html>

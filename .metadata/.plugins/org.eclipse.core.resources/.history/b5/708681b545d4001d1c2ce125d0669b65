@@ -1,0 +1,5 @@
+package com.lab5.springbootrestexample.model;
+
+public class Customer {
+
+}

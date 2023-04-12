@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Show topic</title>
+</head>
+<body>
+	<h2>Chủ đề: <span th:text="${topic.title}"></span> </h2>
+	<p>
+	Bài mới nhất gửi 
+	<span th:text="${topic.createdTime}"></span>
+	, do
+	 <span th:with="newMessage=${topic.getNewMessage()}">
+		 <a href="#" th:if="${newMessage != null}" th:text="${newMessage.creator.username}"></a>
+		 <a href="#" th:if="${newMessage == null}" th:text="${topic.creator.username}"></a>
+		gửi. <span th:text="${topic.messages.size()}"></span> hồi âm
+	 </span>
+	</p>
+	
+	<table border="1" style="width:1000px">
+		<thead>
+			<tr align="left">
+				<td colspan="3" th:text="${topic.createdTime}"></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th rowspan="2">
+				<p th:text="${topic.creator.username}"></p>
+				Tham gia từ 
+				<p th:text="${topic.creator.joinDate}"></p>
+				</th>
+				<td th:text="${topic.title}"></td>
+				<th><a href="#">Trả lời</a></th>
+			</tr>
+			<tr>
+				<td th:text="${topic.content}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

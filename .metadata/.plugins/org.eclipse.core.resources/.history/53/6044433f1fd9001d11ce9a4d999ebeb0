@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>New Topic</title>
+</head>
+<body>
+	<div th:if="${!session.isEmpty()}" th:insert="welcome :: welcome"></div>
+	<div>
+	  <form th:action="@{/newTopic}" method="post">
+        <label>Tiêu đề</label>
+        <input type="text"/>
+
+        <label>Nội dung:</label>
+        <textarea rows="5" cols="50"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+		
+	</div>
+</body>
+</html>

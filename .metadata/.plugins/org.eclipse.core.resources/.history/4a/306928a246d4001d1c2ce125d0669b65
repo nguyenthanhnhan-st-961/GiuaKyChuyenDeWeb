@@ -1,0 +1,74 @@
+package com.lab5.springbootrestexample.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/customers")
+public class CustomerController {
+
+	@Autowired
+	CustomerService customerService;
+
+	/**
+	 * Get all the customer available in the underlying system
+	 * 
+	 * @return list of customers
+	 */
+	@GetMapping
+	public ResponseEntity &lt;List&lt;Customer&gt;&gt; getCustomers() {
+	List &lt;Customer&gt; customers = customerService.getCustomers();
+	return new ResponseEntity&lt;&gt;(customers, HttpStatus.OK);
+	}
+
+	/**
+	 * Create a customer with the system.This end point accepts customer information
+	 * in the json format.It will create and send back the data to the REST
+	 * customer.
+	 * 
+	 * @param customer
+	 * @return newely created customer
+	 */
+	@PostMapping(value = &quot;/customer&quot;)
+	public ResponseEntity&lt;Customer&gt; createCustomer(@RequestBody Customer
+	customer) {
+
+	final Customer customerData =
+	customerService.createCustomer(customer);
+
+	return new ResponseEntity&lt;&gt;(customerData, HttpStatus.CREATED);
+	}
+	/**
+	 * Deleted the customer from the system.client will pass the ID for the customer
+	 * and this end point will remove customer from the system if found.
+	 * 
+	 * @param id
+	 * @return
+	 * 
+	 */
+	@DeleteMapping(value=&quot;/customer/{id}&quot;)
+
+	public ResponseEntity&lt;String&gt; deleteCustomer(@PathVariable Long id) {
+	customerService.deleteCustomer(id);
+	return new ResponseEntity&lt;&gt;(HttpStatus.OK);
+	}
+	/**
+	 * Get the customer detail based on the id passed by the client API.
+	 * 
+	 * @param id
+	 * @return customer detail
+	 */
+	@GetMapping(value=&quot;/customer/{id}&quot;)
+
+	public ResponseEntity&lt;Customer&gt; getCustomer(@PathVariable Long id) {
+	Customer customer = customerService.getCustomer(id);
+	return new ResponseEntity&lt;&gt;(customer, HttpStatus.OK);
+	}
+}

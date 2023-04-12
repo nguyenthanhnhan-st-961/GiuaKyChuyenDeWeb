@@ -1,0 +1,56 @@
+package com.midterm.Forum.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.midterm.Forum.model.User;
+import com.midterm.Forum.service.ForumService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+
+public class ForumController {
+
+	@Autowired
+	ForumService forumService;
+
+	@Autowired
+	HttpSession session;
+
+	@RequestMapping("/")
+	public String home() {
+		System.out.println("Going home...");
+		return "index";
+	}
+
+	@GetMapping("/login")
+	public String loginForm(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		return "login";
+	}
+
+	@PostMapping("/login")
+	public String loginSubmit(@ModelAttribute("user") User user) {
+		User usr = forumService.checkUser(user.getUsername(), user.getPassword());
+		System.out.println(usr);
+		if (usr != null) {
+			System.out.println("Login successful");
+
+			session.setAttribute("user", usr);
+
+			System.out.println(session.getAttribute("user"));
+
+			return "index";
+		}
+		System.out.println("Login failed");
+		return "login";
+	}
+}

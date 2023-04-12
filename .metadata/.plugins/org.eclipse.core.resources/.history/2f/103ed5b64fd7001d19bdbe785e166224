@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<h3>Diễn đàn: Chuyện học phí và các chính sách hỗ trợ học tập</h3>
+
+	<a href="#"><button type="button" >Gởi bài viết</button></a>
+	
+	 <table>
+        <tr th:each="row : ${rows}">
+            <td th:text="${row.id}">1</td>
+            <td th:text="${row.name}">Chủ đề</td>
+            <td th:text="${row.description}">Hồi âm</td>
+        </tr>
+    </table>
+</body>
+</html>
